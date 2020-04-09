@@ -1,0 +1,12 @@
+public static int sum(int input[]) {
+        int k=0;
+		if(input.length==1){
+            return input[input.length-1];
+        }
+        int smallInput[]=new int[input.length-1];
+        for(int i=1;i<input.length;i++){
+            smallInput[i-1]=input[i];
+        }
+        return input[k]+sum(smallInput);
+        
+	}
