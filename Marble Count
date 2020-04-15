@@ -1,0 +1,58 @@
+Target Marbles
+Send Feedback
+At CodingNinjas, we love to play with marbles. We have many marble games, but the most popular one is “Target Marbles”. Now, our marbles are unique. Each marble has a number on it.
+In Target Marbles, the player is given a number in the starting and this number is called target. The player is also given N number of marbles to play with. Now, player has to arrange the marbles in a specific way such that sum of the values of at least one of the continuous subset of the arrangement is equal to given target.
+Now, NinjaCoder came to play this game and made an arrangement of marbles. The judges of the game need your help. You have to determine if NinjaCoder has won it or not.
+Input Format :
+First line contains number of marbles(N) and target (target_number) that was assigned to NinjaCoder. Second line contains N space separated integers, which represent arrangement of the marbles and value written on that particular marble.
+Constraints:
+1<= N <=100
+1<=target_number<=10000
+Value on the marbles lies in the range [0, 1000].
+Output Format :
+You have to print “true”, if the NinjaCoder wins with the given arrangement and you have to print the values of the continuous subsets. If there are more that one continuous subsets, then you have to print the values of first continuous subset. If the Ninjas coder is unable to win, you just have to print “false”.
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		// Write your code here
+		Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int target=sc.nextInt();
+        int a[]=new int[n];
+        ArrayList<Integer> al=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+        }
+        //int flag=0;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            int j=i;
+            sum=0;
+            int count=0;
+            while(sum!=target && j<n){
+                sum+=a[j];
+                j++;
+                count++;
+               
+            }
+            if(sum==target){
+                System.out.println("true");
+                for(int k=0;k<count;k++){
+                    System.out.print(a[n-count+k]+" ");
+                }
+                break;
+            }
+        }
+        if(!(sum==target))
+        {
+            System.out.println("false");
+
+        }          
+	}
+
+}
