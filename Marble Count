@@ -32,20 +32,21 @@ public class Main {
         int sum=0;
         for(int i=0;i<n;i++){
             int j=i;
-            sum=0;
-            int count=0;
+            sum=0;            
             while(sum!=target && j<n){
                 sum+=a[j];
-                j++;
-                count++;
-               
+                
+                al.add(a[j]);
+               j++;
             }
             if(sum==target){
                 System.out.println("true");
-                for(int k=0;k<count;k++){
-                    System.out.print(a[n-count+k]+" ");
+                for(int k=0;k<al.size();k++){
+                    System.out.print(al.get(k)+" ");
                 }
                 break;
+            }else{
+                al=new ArrayList<>();
             }
         }
         if(!(sum==target))
