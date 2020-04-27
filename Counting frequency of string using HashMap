@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+
+	
+	public static void main(String[] args) {
+		/* Your class should be named Main.
+ 			* Read input as specified in the question.
+ 			* Print output as specified in the question.
+		*/
+		Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        ArrayList<String> al=new ArrayList<>();
+        StringTokenizer st=new StringTokenizer(str," ");
+        while(st.hasMoreTokens()){
+            al.add(st.nextToken());
+        }
+        HashMap<String,Integer> hs=new HashMap<>();
+        int n=0;
+        for(String s:al){
+            
+            if(hs.get(s)!=null){
+            	n=hs.get(s);
+            	n++;
+                }
+            else
+                n=1;
+            hs.put(s,n);
+        }
+        Iterator it=hs.entrySet().iterator();
+        int flag=0;
+        while(it.hasNext()){
+            Map.Entry mp=(Map.Entry)it.next();
+            if((int)mp.getValue()>1){
+                System.out.println(mp.getKey()+" "+mp.getValue());
+                flag=1;
+            }
+        }
+        if(flag==0){
+            System.out.println("-1");
+        }
+		// Write your code here
+
+	}
+
+}
