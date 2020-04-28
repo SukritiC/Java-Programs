@@ -1,0 +1,75 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2;
+
+/**
+ *
+ * @author Hp
+ */
+public class KeyPad_Combinations {
+
+    public static String[] helper(int n) {
+        String _2[] = {"a", "b", "c"};
+        String _3[] = {"d", "e", "f"};
+        String _4[] = {"g", "h", "i"};
+        String _5[] = {"j", "k", "l"};
+        String _6[] = {"m", "n", "o"};
+        String _7[] = {"p", "q", "r", "s"};
+        String _8[] = {"t", "u", "v"};
+        String _9[] = {"w", "x", "y", "z"};
+        if (n == 2) {
+            return _2;
+        }
+        if (n == 3) {
+            return _3;
+        }
+        if (n == 4) {
+            return _4;
+        }
+        if (n == 5) {
+            return _5;
+        }
+        if (n == 6) {
+            return _6;
+        }
+        if (n == 7) {
+            return _7;
+        }
+        if (n == 8) {
+            return _8;
+        }
+        return _9;
+    }
+
+    public static String[] findKey(int num) {
+        if (num == 0) {
+            String ans[] = {""};
+            return ans;
+        }
+        int n = num % 10;
+        String smallAns[] = findKey(num / 10);
+        String s1[] = helper(n);
+        String ans[] = new String[(smallAns.length * s1.length)];
+        int j = 0;
+        for (int i = 0; i < smallAns.length; i++) {
+            for (int k = 0; k < s1.length; k++) {
+                ans[j] = smallAns[i].concat(s1[k]);
+                j++;
+            }
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        String ans[] = findKey(23);
+        System.out.println();
+        for (String a : ans) {
+            System.out.println(a);
+        }
+
+    }
+}
