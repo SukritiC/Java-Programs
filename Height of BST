@@ -1,0 +1,14 @@
+public static int height(Node aNode) {
+      	 int heightLeft = -1;
+        int heightRight = -1;
+        if(aNode.left!=null)
+            heightLeft = height(aNode.left);
+        if(aNode.right!=null)
+            heightRight = height(aNode.right);
+        if(heightLeft > heightRight){
+            return heightLeft+1;
+        }
+        else{
+            return heightRight+1;
+        }
+    }
