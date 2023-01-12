@@ -1,0 +1,62 @@
+/*
+Given two strings denoting non-negative numbers X and Y. Calculate the sum of X and Y.
+*/
+
+class Solution {
+    String findSum(String X, String Y) {
+        // code here
+        if (X.length() > Y.length()){
+            String t = X;
+            X = Y;
+            Y = t;
+        }
+        int n1 = X.length();
+        int n2 = Y.length();
+        String s ="";
+        X = new StringBuilder(X).reverse().toString();
+        Y = new StringBuilder(Y).reverse().toString();
+        int carry = 0;
+        for(int i=0;i<n1;i++){
+            int a = (int)(X.charAt(i) - '0');
+            int b = (int)(Y.charAt(i) - '0');
+            int sum = a + b + carry;
+            s += (char)(sum % 10 + '0');
+            carry = sum /10;
+            
+            
+        }
+        for(int i=n1;i<n2;i++){
+            int b = (int)(Y.charAt(i) - '0');
+            
+            int sum = b + carry;
+            s += (char)(sum % 10 + '0');
+            carry = sum/10;
+            
+        }
+        if(carry > 0){
+            s += (char)(carry + '0');
+        }
+        // System.out.println(s);
+        s = new StringBuilder(s).reverse().toString();
+        // System.out.println(s);
+        if (s.charAt(0) == '0'){
+            int ind=0;
+    		for (int i = 0; i < s.length(); i++) {
+                char p = s.charAt(i);
+                if (p != '0') {
+                    ind = i;
+                    break;
+                }
+            }
+            // System.out.println(s+" "+ind);
+            if (ind == 0)
+                s= "0";
+            else{
+                String newstr = s.substring(ind, s.length());
+        		s= newstr;
+            }
+        }
+        return s;
+        
+    }
+}
