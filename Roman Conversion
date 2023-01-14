@@ -1,0 +1,43 @@
+/*
+Given a string in roman no format (s)  your task is to convert it to an integer . Various symbols and their values are given below.
+*/
+
+class Solution {
+    // Finds decimal value of a given roman numeral
+    public int romanToDecimal(String str) {
+        // code here
+        int num = 0;
+        Map<String, Integer> mp = new HashMap<String, Integer>();
+        mp.put("I",1);
+        mp.put("V",5);
+        mp.put("X",10);
+        mp.put("L",50);
+        mp.put("C",100);
+        mp.put("D",500);
+        mp.put("M",1000);
+        if(str.length()== 1){
+            return mp.get(str);
+        }
+        else{
+            for(int i=0;i<str.length();i++){
+                char ch = str.charAt(i);
+                int val = mp.get(Character.toString(ch));
+                if (num == 0)
+                    num += val;
+                else if(ch == 'V' || ch == 'X'|| ch =='L' ||ch == 'C'||ch == 'D'||ch == 'M')
+                 {
+                     char c = str.charAt(i-1);
+                     int t = mp.get(Character.toString(c));
+                        if (t<val)
+                            num = num + val - 2*t;
+                        else
+                            num += val;
+                 }
+                 else{
+                     num += val;
+                 }
+            }
+        }
+        return num;
+    }
+}
