@@ -1,0 +1,21 @@
+/*
+Given a number and its reverse. Find that number raised to the power of its own reverse
+*/
+
+class Solution
+{
+    long temp=1;
+    long power(int N,int R)
+    {
+        //Your code here
+        long max=(long)Math.pow(10,9)+7;
+        if(R==0)
+        return 1;
+        temp=power(N,R/2);
+        temp=(temp*temp)%max;
+        if(R%2==0)
+        return temp%max;
+        else
+        return (temp*N)%max;
+    }
+}
