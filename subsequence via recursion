@@ -1,0 +1,26 @@
+static void sub_seq(int i,int n, ArrayList<Integer> al, ArrayList<Integer> a1){
+        
+        if(i>=n){
+         for(Integer a:al){
+             if(a == null){
+                 System.out.print("{}");
+             }else
+             System.out.print(a+" ");
+         }   
+         System.out.println();
+         return;
+        }
+        al.add(a1.get(i));
+        sub_seq(i+1,n,al,a1);
+        al.remove(a1.get(i));
+        sub_seq(i+1,n,al,a1);
+        
+    }
+    public static void main(String[] args) {
+        // System.out.println("Hello, World!");
+        ArrayList<Integer> al = new ArrayList<>();
+        al.add(1);
+        al.add(2);
+        al.add(3);
+        HelloWorld.sub_seq(0,al.size(),new ArrayList<Integer>(),al);
+    }
