@@ -1,0 +1,46 @@
+import java.util.*;
+class HelloWorld {
+    ArrayList<Integer> a1;
+    int sum;
+    int n;
+   boolean sub_seq(int i, ArrayList<Integer> al,  int s){
+    //   for(Integer a:a1){
+    //              System.out.print(a+"-");
+    //         }   
+    //         System.out.println();
+       if(i==n){
+        if(s == sum ){
+            for(Integer a:al){
+                 System.out.print(a+" ");
+            }   
+            System.out.println(',');
+            return true;
+        }
+        return false;
+       }
+    //   System.out.println(i+" "+s);
+        al.add(a1.get(i));
+        s += a1.get(i);
+        if(sub_seq(i+1,al,s) == true)
+            return true;
+        al.remove(a1.get(i));
+        s -= a1.get(i);
+        if(sub_seq(i+1,al,s) == true)
+        return true;
+        return false;
+    }
+    public static void main(String[] args) {
+        // System.out.println("Hello, World!");
+        HelloWorld hw = new HelloWorld();
+        
+        hw.a1 = new ArrayList<>();
+        hw.a1.add(1);
+        hw.a1.add(2);
+        hw.a1.add(2);
+        hw.a1.add(1);
+        hw.a1.add(1);
+        hw.sum = 3;
+        hw.n = hw.a1.size();
+        hw.sub_seq(0,new ArrayList<Integer>(),0);
+    }
+}
