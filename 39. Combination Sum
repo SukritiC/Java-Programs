@@ -1,0 +1,21 @@
+class Solution {
+    public void comb(int i, ArrayList<Integer> al, int sum, int arr[], int n, List<List<Integer>>result){
+        if(i == n){
+            if(sum == 0){
+                result.add(new ArrayList<>(al));
+            }
+            return;
+        }
+        if(arr[i] <= sum){
+            al.add(arr[i]);
+            comb(i,al,sum- arr[i],arr,n,result);
+            al.remove(al.size()-1);
+        }        
+        comb(i+1,al,sum,arr,n,result);
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> complete_list = new ArrayList<>();
+        comb(0, new ArrayList<Integer>(), target, candidates,candidates.length,complete_list);
+        return complete_list;
+    }
+}
