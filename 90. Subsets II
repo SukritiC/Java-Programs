@@ -1,0 +1,29 @@
+90. Subsets II
+Given an integer array nums that may contain duplicates, return all possible 
+subsets
+ (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+class Solution {
+    public void subset(int i,ArrayList<Integer> al,List<List<Integer>> result,List<Integer> nums){
+        if(i==nums.size()){
+             if (!result.contains(al)) 
+                result.add(new ArrayList<>(al));
+            return;
+        }
+        
+        subset(i+1,al,result,nums);
+        al.add(nums.get(i));
+        subset(i+1,al,result,nums);
+        al.remove(al.size()-1);
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Integer[] arr = Arrays.stream( nums ).boxed().toArray( Integer[]::new );
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> lst = Arrays.asList(arr);
+        Collections.sort(lst);
+        subset(0,new ArrayList<Integer>(),results,lst);
+        return results;
+    }
+}
