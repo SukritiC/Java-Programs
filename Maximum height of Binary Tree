@@ -1,0 +1,35 @@
+/*Maximum height of Binary Tree*/
+
+import java.util.*;
+class TreeNode{
+int data;
+TreeNode left;
+TreeNode right;
+TreeNode(){}
+TreeNode(int data){this.data = data;}
+TreeNode(int data, TreeNode left, TreeNode right){
+	this.data = data;
+	this.left = left;
+	this.right = right;
+	}
+}
+public class Solution{
+    public int maxDepth(TreeNode root){
+        if(root == null)
+            return 0;
+        int left_H = maxDepth(root.left);
+        int right_H = maxDepth(root.right);
+        return 1+Math.max(left_H, right_H);
+    }
+    public static void main(String ar[]){
+    	TreeNode root = new TreeNode(1);
+    	root.left = new TreeNode(2);
+    	root.right = new TreeNode(3);
+    	root.right.left = new TreeNode(4);
+    	root.right.left.left = new TreeNode(5);
+    	root.right.right = new TreeNode(6);
+    	root.right.right.left = new TreeNode(7);
+    	root.right.right.left.left = new TreeNode(8);
+    	System.out.println(new Solution().maxDepth(root));
+    }
+}
