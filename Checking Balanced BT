@@ -30,6 +30,7 @@ public class Solution{
             return 0;
         int left_H = maxDepth(root.left);
         int right_H = maxDepth(root.right);
+	if (left_H == -1 || right_H == -1) return -1;
         if(Math.abs(left_H - right_H)>1)return -1;
         return 1+Math.max(left_H, right_H);
     }
