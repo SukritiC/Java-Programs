@@ -1,0 +1,41 @@
+import java.util.*;
+class TreeNode{
+int data;
+TreeNode left;
+TreeNode right;
+TreeNode(){}
+TreeNode(int data){this.data = data;}
+TreeNode(int data, TreeNode left, TreeNode right){
+	this.data = data;
+	this.left = left;
+	this.right = right;
+	}
+}
+public class Solution{
+    private int maxDepth(TreeNode root,int []maxi){
+        if(root == null)
+            return 0;
+        int left_H = maxDepth(root.left, maxi);
+        int right_H = maxDepth(root.right,maxi);
+        maxi[0] = Math.max(maxi[0], left_H+right_H);
+        return 1+Math.max(left_H, right_H);
+    }
+    public int diameterOfBT(TreeNode root){
+        int []dia = new int[1];
+        maxDepth(root,dia);
+        return dia[0];
+    }
+    public static void main(String ar[]){
+    	TreeNode root = new TreeNode(1);
+    	root.left = new TreeNode(2);
+    	root.right = new TreeNode(3);
+    	root.right.left = new TreeNode(4);
+    	root.right.left.left = new TreeNode(5);
+    	root.right.left.left.left = new TreeNode(9);
+    	root.right.right = new TreeNode(6);
+    	root.right.right.right = new TreeNode(7);
+    	root.right.right.right.right = new TreeNode(8);
+    	System.out.println(new Solution().diameterOfBT(root));
+   
+    }
+}
