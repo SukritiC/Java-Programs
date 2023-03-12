@@ -17,7 +17,7 @@ public class Solution{
             return 0;
         int left_H = maxDepth(root.left, maxi);
         int right_H = maxDepth(root.right,maxi);
-        maxi[0] = Math.max(maxi[0], left_H+right_H);
+        maxi[0] = Math.max(maxi[0], left_H+right_H+1);
         return 1+Math.max(left_H, right_H);
     }
     public int diameterOfBT(TreeNode root){
