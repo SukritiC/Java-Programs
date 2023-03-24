@@ -1,0 +1,22 @@
+Given a Binary Tree of size N, You have to count leaves in it. For example, there are two leaves in following tree
+
+class Node
+{
+    int data;
+    Node left, right;
+}*/
+
+class Tree
+{
+    int countLeaves(Node node) 
+    {
+         // Your code  
+        if(node == null)
+            return 0;
+        if(node.left == null && node.right == null)
+            return 1;
+        int count_left = countLeaves(node.left);
+        int count_right = countLeaves(node.right);
+        return count_left + count_right;
+    }
+}
