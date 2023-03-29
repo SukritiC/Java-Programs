@@ -1,0 +1,73 @@
+Given an array A[] of N elements. Return all the triplets [A[i], A[j], A[k]] such that  i < j < k and A[i] + A[j] + A[k] = 0.
+Notice that the solution set must not contain duplicate triplets.
+
+//{ Driver Code Starts
+//Initial Template for Java
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader read =
+            new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        int t = Integer.parseInt(read.readLine());
+        while (t-- > 0) {
+            int N = Integer.parseInt(read.readLine());
+            
+            String S1[] = read.readLine().split(" ");
+            
+            int[] A = new int[N];
+            
+            for(int i=0; i<N; i++)
+                A[i] = Integer.parseInt(S1[i]);
+
+            Solution ob = new Solution();
+            ArrayList<ArrayList<Integer>> ans = ob.findTriplets(A,N);
+            for (int i = 0; i < ans.size(); i++) {
+                for (int j = 0; j < 3; j++) {
+                    out.print(ans.get(i).get(j) + " ");
+                }
+                out.println();
+            }
+        }
+        out.flush();
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution {
+    public ArrayList<ArrayList<Integer>> findTriplets(int nums[], int N) {
+        // code here
+        Arrays.sort(nums);
+       ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        for(int i = 0; i < nums.length && nums[i] <= 0; ++i) {
+            if (i == 0 || nums[i - 1] != nums[i]) {
+                twoSumII(nums, i, res);
+            }
+        }
+        return res;
+    }
+    void twoSumII(int[] nums, int i, ArrayList<ArrayList<Integer>> res) {
+        int lo = i + 1, hi = nums.length - 1;
+        while (lo < hi) {
+            int sum = nums[i] + nums[lo] + nums[hi];
+            if (sum < 0 || (lo > i + 1 && nums[lo] == nums[lo - 1])) {
+                ++lo;
+            }
+            else if ( sum > 0 || (hi < nums.length - 1 && nums[hi] == nums[hi + 1])) {
+                --hi;
+            }
+            else {
+                ArrayList<Integer> n1 = new ArrayList<>();
+                n1.add(nums[i]);
+                n1.add(nums[lo++]);
+                n1.add(nums[hi--]);
+                res.add(n1);
+            }
+        }
+    }
+};
