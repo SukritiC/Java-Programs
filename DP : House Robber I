@@ -1,0 +1,21 @@
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+class Solution {
+    int rob_sum(int []a, int i, int []dp){
+        if(i == 0) return a[i];
+        if(i < 0) return 0;
+        if (dp[i] != -1) return dp[i];
+        int pick_house = a[i] + rob_sum(a, i-2, dp);
+        int drop_house = 0 + rob_sum(a,i-1, dp);
+        return dp[i] = Math.max(pick_house, drop_house);
+    }
+    public int rob(int[] nums) {
+        int dp[] = new int[nums.length];
+        for(int i=0;i<dp.length;i++){
+            dp[i] = -1;
+        }
+        return rob_sum(nums, nums.length-1, dp);
+    }
+}
