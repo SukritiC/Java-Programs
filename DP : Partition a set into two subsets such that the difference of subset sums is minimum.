@@ -1,0 +1,42 @@
+Partition a set into two subsets such that the difference of subset sums is minimum.
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int minSubsetSumDifference(int[] arr, int n) {
+		// Write your code here.
+		int sum = 0;
+		for(int a:arr)
+			sum += a;
+		boolean dp[][] = new boolean[n][sum+1];
+		for(int i=0;i<n;i++){
+			dp[i][0] = true;
+		}
+		if(arr[0] <= sum)
+		dp[0][arr[0]] = true;
+		for(int i=1;i<n;i++){
+			for(int t=1;t<=sum;t++){
+				boolean n_pick = dp[i-1][t];
+				boolean pick = false;
+				if(arr[i] <= t)
+					pick = dp[i-1][t - arr[i]];
+				dp[i][t] = n_pick || pick;		
+			}
+		}
+		ArrayList<Integer> s1 = new ArrayList<>();
+		ArrayList<Integer> s2 = new ArrayList<>();
+		for(int i=0;i<=sum;i++){
+			if (dp[n-1][i])
+				s1.add(i);
+		}
+		for(Integer a:s1){
+			s2.add(sum-a);
+		}
+		int min = Integer.MAX_VALUE;
+		for(int i=0;i<s1.size();i++){
+			min = Math.min(min, Math.abs(s1.get(i)-s2.get(i)));
+		}
+		return min;
+	}
+
+}
