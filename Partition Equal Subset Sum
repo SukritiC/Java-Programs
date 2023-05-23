@@ -1,0 +1,32 @@
+import java.util.*;
+public class Solution {
+	static boolean has_subset(int i, int t, int []a, int [][]dp){
+        if(t == 0) return true;
+        if(i == 0) {
+           return (a[i] == t);
+        }
+        if (dp[i][t] != -1) return dp[i][t] == 0?false:true;
+        boolean n_pick = has_subset(i-1, t, a, dp);
+        boolean pick = false;
+        if(t >= a[i]){
+            pick = has_subset(i-1, t-a[i], a, dp);
+            dp[i][t]=n_pick||pick?1:0;
+        }
+        return (pick || n_pick);
+
+    }
+	public static boolean canPartition(int[] arr, int n) {
+		// Write your code here.		
+		int sum = 0;
+		for (int a:arr){
+			sum += a;
+		}
+		if (sum%2 == 1)
+			return false;
+		int k = sum/2;
+		int dp[][] = new int[n][k+1];
+        for(int row[]:dp)
+        Arrays.fill(row, -1);
+        return Solution.has_subset(n-1,k,arr, dp);
+	}
+}
