@@ -1,0 +1,36 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    static int calc_subset(int i, int t, int[] arr, int [][]dp)
+    {
+        if(i == 0){
+            if(t == 0 && arr[0] == 0)
+                return 2;
+            if(t ==0 || t == arr[0])
+                return 1;
+            return 0;
+        }
+        if(dp[i][t] != -1)
+            return dp[i][t];
+            
+        int n_pick = calc_subset(i-1, t, arr, dp);
+        int pick = 0;
+        if(arr[i] <= t)
+            pick = calc_subset(i-1, t - arr[i], arr, dp);
+        return dp[i][t] = pick+n_pick;
+    }
+    public static int targetSum(int n, int target, int[] arr) {
+    	// Write your code here.
+        int total_sum = 0;
+        for(int a:arr)
+            total_sum += a;
+
+        if (total_sum - target < 0) return 0;
+        if ((total_sum - target)%2 == 1) return 0;
+        int t = (total_sum - target)/2;
+        int [][]dp = new int[n][t+1];
+        for(int rows[]:dp)
+            Arrays.fill(rows, -1);
+        return calc_subset(n-1, t, arr, dp);
+    }
+}
