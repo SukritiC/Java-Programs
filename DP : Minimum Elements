@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    static int count_element(int i, int target, int num[], int [][]dp){
+        if(i == 0){
+            if(target%num[0] == 0)
+                return target/num[0];
+            return (int)Math.pow(10,9);
+        }
+        if(dp[i][target] != -1)
+            return dp[i][target];
+        int n_pick = 0 + count_element(i-1, target, num, dp);
+        int pick = (int)Math.pow(10,9);
+        if(num[i] <= target)
+            pick = 1 + count_element(i, target - num[i], num, dp);
+        
+        return dp[i][target] = Math.min(n_pick, pick);
+    }
+    public static int minimumElements(int num[], int x) {
+        // Write your code here..
+        int n = num.length;
+        int dp[][] = new int[n][x+1];
+        for(int rows[]:dp)
+            Arrays.fill(rows, -1);
+        int ans = count_element(n-1, x, num, dp);
+        if(ans >= (int)Math.pow(10,9)) return -1;
+        return ans;
+    }
+
+}
