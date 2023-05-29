@@ -1,0 +1,20 @@
+import java.util.*;
+public class Solution {
+	static int calc(int i, int j, String s, String t, int[][] dp){
+		if(i<0||j<0) return 0;
+		if(dp[i][j] != -1) return dp[i][j];
+		if(s.charAt(i) == t.charAt(j)) 
+			return dp[i][j] = 1 + calc(i-1, j-1, s, t, dp);
+		return dp[i][j] = Math.max(calc(i-1, j, s, t,dp), calc(i, j-1, s, t, dp));
+	}
+	public static int lcs(String s, String t) {
+		//Your code goes here
+		int n = s.length();
+		int m = t.length();
+		int [][]dp = new int[n][m];
+		for(int rows[]:dp)
+			Arrays.fill(rows,-1);
+		return calc(n-1, m-1, s, t, dp);
+    }
+
+}
