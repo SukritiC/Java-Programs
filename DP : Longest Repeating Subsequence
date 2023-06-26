@@ -1,0 +1,28 @@
+Given string str, find the length of the longest repeating subsequence such that it can be found twice in the given string.
+
+The two identified subsequences A and B can use the same ith character from string str if and only if that 
+ith character has different indices in A and B. For example, A = "xax" and B = "xax" then the index of first "x" must be different in the original string for A and B.
+
+class Solution
+{
+    int calc(int i, int j, int n, String s, int [][]dp){
+        if(i == n || j == n)
+            return 0;
+        if(dp[i][j] != -1)
+            return dp[i][j];
+        if(i != j && s.charAt(i) == s.charAt(j) )
+            return dp[i][j] = 1 + calc(i+1, j+1, n, s, dp);
+        
+        return dp[i][j] = Math.max(calc(i+1,j,n,s, dp),calc(i,j+1,n,s,dp));
+    }
+    public int LongestRepeatingSubsequence(String str)
+    {
+        // code here
+        
+        int n = str.length();
+        int dp[][] = new int[n+1][n+1];
+        for(int []rows:dp)
+            Arrays.fill(rows,-1);
+        return calc(0,0, n, str,dp);
+    }
+}
