@@ -1,0 +1,71 @@
+/********************************************************************
+
+ Following is the class structure of the Node class:
+
+ class BinaryTreeNode {
+     int data;
+     BinaryTreeNode left;
+     BinaryTreeNode right;
+
+     BinaryTreeNode(int data) {
+         this.data = data;
+         this.left = null;
+         this.right = null;
+     }
+ };
+
+ ********************************************************************/
+import java.util.*;
+
+public class Solution {
+    public static boolean hasPath(BinaryTreeNode root, List<Integer> ans, int x){
+        if(root ==null)
+            return false;
+        
+        ans.add(root.data);
+        if (root.data == x){
+            // return true;
+        if (root.left == null && root.right == null)
+            return true;
+        }
+        if(hasPath(root.left, ans, x) || hasPath(root.right, ans, x))
+            return true;
+        
+        // the path not present
+        ans.remove(ans.size() -1);
+        return false;
+    }
+    public static boolean isLeaf(BinaryTreeNode n){
+        return (n.left == null && n.right == null);
+    }
+    public static List<String> allRootToLeaf(BinaryTreeNode root) {
+        // Write your code here.
+        List<Integer> ans = new ArrayList<>();
+        List<String> res = new ArrayList<>();
+        List<Integer> leaves = new ArrayList<>();
+        Queue<BinaryTreeNode> q = new LinkedList<BinaryTreeNode>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            BinaryTreeNode n = q.poll();
+            if(isLeaf(n))
+                leaves.add(n.data);
+            if(n.left != null)
+                q.offer(n.left);
+            if(n.right != null)
+                q.offer(n.right);
+            
+        }
+        for(Integer leaf:leaves){
+            String s = "";
+            ans = new ArrayList<>();
+            if(hasPath(root, ans, leaf)){
+                for(int i=0;i<ans.size();i++){
+                    s += ans.get(i)+" "; 
+                }
+                res.add(s);
+            }
+        }
+        return res;
+        
+    }
+}
