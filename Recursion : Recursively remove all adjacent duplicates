@@ -1,0 +1,53 @@
+Recursively remove all adjacent duplicates
+
+void removeDup(char[] ch, int i, int n, ArrayList<Character> str){
+        if(i == n){
+            return;
+        }
+        if(i == 0){ 
+            if (ch[i] != ch[i+1])
+                str.add(ch[i]);
+        }
+        else if(i == n-1) {
+            if (ch[i-1] != ch[i])
+                str.add(ch[i]);
+        }
+        else{
+            if(ch[i] != ch[i+1] && ch[i-1] != ch[i])
+                str.add(ch[i]);
+        }
+        removeDup(ch, i+1, n, str);
+    }
+    
+    boolean hasDuplicate(char[] s){
+        if (s.length <= 1)
+            return false;
+        for (int i = 0; i < s.length - 1; i++) {
+            if (s[i] == s[i+1]) {
+                return true; // Found duplicate adjacent characters
+            }
+        }
+        return false; // No duplicate adjacent characters found
+    }
+    String createString(ArrayList<Character> str){
+        String answer ="";
+        for(Character chh:str){
+            answer += chh;
+        }
+        return answer;
+    }
+    
+    String rremove(String s) {
+        // code here
+        char []ch = s.toCharArray();
+        Set<Character> st = new HashSet<>();
+        ArrayList<Character> nwStr = new ArrayList<>();
+        String answer = s;
+        while(hasDuplicate(ch)){
+            nwStr =  new ArrayList<>();
+            removeDup(ch, 0, answer.length(), nwStr);
+            answer = createString(nwStr);
+            ch = answer.toCharArray();
+        }
+        return answer;
+    }
